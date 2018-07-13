@@ -12,26 +12,17 @@ describe('PrefixTrie', () => {
     expect(newTrie).to.exist;
   });
 
-  it('should default the rootNode node data to null', () => {
+  it('should have a rootNode', () => {
     expect(newTrie.rootNode).to.deep.equal({
-      data: null,
       childrenCount: 0,
-      children: []
+      children: {}
     });
-  });
-
-  // it('should have a children prop that defaults to an empty array', () => {
-  //   expect(newTrie.children).to.deep.equal([]);
-  // });
-
-  it('should keep a children count', () => {
-    expect(newTrie.childrenCount).to.equal(0);
   });
 
   it('should add a child node when a word is inserted if that letter does not already exist', () => {
     newTrie.insert('tie');
-    expect(newTrie.rootNode.children[0].data).to.equal('t');
-    expect(newTrie.rootNode.children[0].children[0].data).to.equal('i');
+    expect('t' in newTrie.rootNode.children).to.equal(true);
+    expect('i' in newTrie.rootNode.children['t'].children).to.equal(true);
   });
 
   it('should not add a child node if that letter already exists', () => {
@@ -41,11 +32,12 @@ describe('PrefixTrie', () => {
     newTrie.insert('tree');
     newTrie.insert('train');
 
-    const occurances = newTrie.rootNode.children.filter(node => {
-      return node.data === 't';
+    const occurances = Object.keys(newTrie.rootNode.children).filter(key => {
+      return key === 't';
     });
 
-    expect(newTrie.rootNode.children[0].data).to.equal('t');
+    expect('t' in newTrie.rootNode.children).to.equal(true);
+    expect('r' in newTrie.rootNode.children['t'].children).to.equal(true);
     expect(occurances.length).to.equal(1);
   });
 });

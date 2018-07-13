@@ -12,11 +12,11 @@ describe('NODE', () => {
     expect(newNode).to.exist;
   });
 
-  it('should have a children prop that defaults to an empty array', () => {
-    expect(newNode.children).to.deep.equal([]);
+  it('should have a childrenCount prop that defaults to 0', () => {
+    expect(newNode.childrenCount).to.equal(0);
   });
 
-  it('should accept data and save it in a data prop', () => {
-    expect(newNode.data).to.equal('burrito');
+  it('should have a children prop that defaults to an empty object', () => {
+    expect(newNode.children).to.deep.equal({});
   });
 });
