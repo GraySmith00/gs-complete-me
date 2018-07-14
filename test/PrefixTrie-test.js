@@ -15,6 +15,8 @@ describe('PrefixTrie', () => {
   it('should have a rootNode', () => {
     expect(newTrie.rootNode).to.deep.equal({
       childrenCount: 0,
+      endOfWord: false,
+      leafNode: false,
       children: {}
     });
   });
@@ -28,8 +30,9 @@ describe('PrefixTrie', () => {
   it('should not add a child node if that letter already exists', () => {
     newTrie.insert('truck');
     newTrie.insert('try');
-    newTrie.insert('tru');
+    newTrie.insert('true');
     newTrie.insert('tree');
+    newTrie.insert('trees');
     newTrie.insert('train');
 
     const occurances = Object.keys(newTrie.rootNode.children).filter(key => {
@@ -39,5 +42,34 @@ describe('PrefixTrie', () => {
     expect('t' in newTrie.rootNode.children).to.equal(true);
     expect('r' in newTrie.rootNode.children['t'].children).to.equal(true);
     expect(occurances.length).to.equal(1);
+  });
+
+  it('should return an empty array if there are no words containing that prefix', () => {
+    newTrie.insert('truck');
+    newTrie.insert('try');
+    newTrie.insert('true');
+    newTrie.insert('tree');
+    newTrie.insert('trees');
+    newTrie.insert('train');
+
+    expect(newTrie.suggest('gap')).to.deep.equal([]);
+  });
+
+  it('should return an array of all words containing a prefix', () => {
+    newTrie.insert('truck');
+    newTrie.insert('try');
+    newTrie.insert('true');
+    newTrie.insert('tree');
+    newTrie.insert('trees');
+    newTrie.insert('train');
+
+    expect(newTrie.suggest('t')).to.deep.equal([
+      'truck',
+      'try',
+      'true',
+      'tree',
+      'trees',
+      'train'
+    ]);
   });
 });
