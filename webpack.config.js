@@ -10,6 +10,9 @@ module.exports = {
     path: __dirname,
     filename: 'dist/[name].bundle.js'
   },
+  node: {
+    fs: 'empty'
+  },
   module: {
     rules: [
       {
