@@ -96,6 +96,7 @@ describe('Suggest Method', () => {
     newTrie.insert('to');
     newTrie.insert('tie');
     newTrie.insert('tree');
+    newTrie.insert('trees');
     newTrie.insert('train');
     newTrie.insert('trucker');
 
@@ -103,15 +104,20 @@ describe('Suggest Method', () => {
       'to',
       'tie',
       'tree',
+      'trees',
       'train',
       'trucker'
     ]);
 
-    expect(newTrie.suggest('tr')).to.deep.equal(['tree', 'train', 'trucker']);
+    expect(newTrie.suggest('tr')).to.deep.equal([
+      'tree',
+      'trees',
+      'train',
+      'trucker'
+    ]);
   });
 });
 
-// Populate
 describe('Populate method', () => {
   let newTrie;
 
