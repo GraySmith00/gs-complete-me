@@ -1,5 +1,3 @@
-const path = require('path');
-
 module.exports = {
   devtool: 'inline-source-map',
   entry: {
@@ -9,6 +7,9 @@ module.exports = {
   output: {
     path: __dirname,
     filename: 'dist/[name].bundle.js'
+  },
+  node: {
+    fs: 'empty'
   },
   module: {
     rules: [
