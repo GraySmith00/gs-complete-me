@@ -9,8 +9,16 @@
 </head>
 <body>
   <div class="page-wrapper">
-    <form class="trie-form">
-      <input type="text" class="trie-word-input" placehoder="look up a word in the dictionary...">
+    <form class="trie-form" autocomplete="off">
+      <div class="autocomplete">
+        <input type="search" class="trie-word-input" placeholder="look up a word in the dictionary...">
+        <div id="autocomplete-items" class="autocomplete-items">
+          <!-- <div>
+            <strong>Tiger Woo</strong>
+            <input type="hidden" value="Tiger Woods">
+          </div> -->
+        </div>
+      </div>
       <input type="submit" class="trie-submit-btn">
     </form>
   </div>
