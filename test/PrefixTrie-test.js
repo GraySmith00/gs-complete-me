@@ -15,10 +15,7 @@ describe('Instantiate PrefixTrie', () => {
 
   it('should have a rootNode', () => {
     expect(newTrie.rootNode).to.deep.equal({
-      data: null,
-      childrenCount: 0,
       endOfWord: false,
-      leafNode: false,
       children: {}
     });
   });
@@ -35,7 +32,7 @@ describe('Insert Method', () => {
     expect(newTrie).respondsTo('populate');
   });
 
-  it('should add a child node when a word is inserted if that letter does not already exist', () => {
+  it('should add node when a word is inserted if not already present', () => {
     newTrie.insert('tie');
     expect('t' in newTrie.rootNode.children).to.equal(true);
     expect('i' in newTrie.rootNode.children['t'].children).to.equal(true);
@@ -63,7 +60,7 @@ describe('Insert Method', () => {
     expect(newTrie.wordCount).to.equal(1);
   });
 
-  it('should not increment the word count if a word that already exists is entered', () => {
+  it('should not increment word count if inserted word already exists', () => {
     newTrie.insert('truck');
     newTrie.insert('truck');
     expect(newTrie.wordCount).to.equal(1);
@@ -81,7 +78,7 @@ describe('Suggest Method', () => {
     expect(newTrie).respondsTo('suggest');
   });
 
-  it('should return an empty array if there are no words containing the prefix', () => {
+  it('should return an empty array if no words starting with prefix', () => {
     newTrie.insert('truck');
     newTrie.insert('try');
     newTrie.insert('true');
@@ -92,7 +89,7 @@ describe('Suggest Method', () => {
     expect(newTrie.suggest('tx')).to.deep.equal([]);
   });
 
-  it('should return an array of all words containing the prefix', () => {
+  it('should return an array of all words starting with the prefix', () => {
     newTrie.insert('to');
     newTrie.insert('tie');
     newTrie.insert('tree');
@@ -153,17 +150,3 @@ describe('Populate method', () => {
     expect(newTrie.wordCount).to.equal(234371);
   });
 });
-
-// Delete
-
-// it('should have a Delete method', () => {
-
-// })
-
-// it('should remove the completed word flag from the word passed into the delete method', () => {
-
-// })
-
-// it('should remove any nodes that no longer lead to a completed word', () => {
-
-// })
